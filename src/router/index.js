@@ -3,6 +3,10 @@ import Router from 'vue-router'
 import home from '../page/home'
 import login from '../page/login'
 import city from '../page/city/city'
+import miste from '../page/miste/miste'
+import search from '../page/search/search'
+import order from '../page/order/order'
+import profile from '../page/profile/profile'
 Vue.use(Router)
 
 export default new Router({
@@ -27,7 +31,24 @@ export default new Router({
         {
           path:'/city',
           component:city
+        },
+        {
+          path:'/search',
+          component:search
+        },
+        {
+          path:'/order',
+          component:order
+        },
+        {
+          path:'/profile',
+          component:profile
+        },
+        {
+          path:'/miste',
+          component:miste
         }
+
          ]
     
     }]

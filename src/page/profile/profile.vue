@@ -1,10 +1,6 @@
 <template>
     <div>
-
-miste
-
-
-
+profile
 <foot></foot>
     </div>
 
@@ -20,7 +16,7 @@ export default {
     },
 
 components:{
-   foot
+foot
 },
 mounted:function(){
 

@@ -7,9 +7,10 @@ import Mint from 'mint-ui'
 import 'mint-ui/lib/style.css'
 import './style/mycss.css'
 import store from './store/index'
+import Icon from 'vue-svg-icon/Icon.vue'
 Vue.use(Mint)
 Vue.config.productionTip = false
-
+Vue.component('icon',Icon)
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
