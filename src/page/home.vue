@@ -17,14 +17,14 @@
       <div class="mgtop10 bgfff">
         <mt-cell class="after" title="热门城市"></mt-cell>
         <div class="itembox ovhid col">
-          <div @click="gocity({name:item.name,id:item.di})"  v-for="(item,index) in hotcitylist" :key="index">{{item.name}}</div>
+          <div @click="gocity({name:item.name,id:item.id})"  v-for="(item,index) in hotcitylist" :key="index">{{item.name}}</div>
         </div>
       </div>
 
       <div v-for="(items,key,index) in getlist" :key="index" class="mgtop10 bgfff">
         <mt-cell class="after" :title="key"></mt-cell>
         <div class="itembox ovhid">
-          <div class="nowarp" @click="gocity({name:item.name,id:item.di})"  v-for="(item,index) in items" :key="index">{{item.name}}</div>
+          <div class="nowarp" @click="gocity({name:item.name,id:item.id})"  v-for="(item,index) in items" :key="index">{{item.name}}</div>
         </div>
       </div>
     </div>
@@ -48,23 +48,23 @@ export default {
 
   methods: {
        getdata () {
-      $.get("/cities", { params: { type: "group" } }).then(Response => {
+      $.get("v1/cities", { params: { type: "group" } }).then(Response => {
         this.citylist = Response.data;
       });
     },
     gethot(){
-      $.get("/cities",{params:{type:"hot"}}).then(Response =>{
+      $.get("v1/cities",{params:{type:"hot"}}).then(Response =>{
         this.hotcitylist=Response.data;
       })
     },
         getlocatecity(){
-      $.get("/cities",{params:{type:"guess"}}).then(Response =>{
+      $.get("v1/cities",{params:{type:"guess"}}).then(Response =>{
         this.$store.state.nowcity={"name":Response.data.name,"id":Response.data.id};
       })
     },
    gocity(e) {
       this.$router.push("city");
-      this.$store.state.nowcity=e;
+      this.$store.commit('changecity',e);
     },
     gologin() {
       this.$router.push("login");

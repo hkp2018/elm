@@ -2,7 +2,7 @@
   <div>
     <mt-header :title="titlevalue" class="fs1-2" fixed>
       <mt-button @click="goback" slot="left" icon="back"></mt-button>
-      <mt-button slot="right" style="font-size: 0.8rem">切换城市</mt-button>
+      <mt-button @click="goback" slot="right" style="font-size: 0.8rem">切换城市</mt-button>
     </mt-header>
     <div class="mgtop50 padlr10 bgfff padbot10">
       <input
@@ -26,8 +26,8 @@
     <div class="main">
       <div v-if="!vif" class="his after">
         <div class="maintop fs0-8 padlr10">搜索历史</div>
-        <div v-if="his!==''" class="mainbody bgfff">
-          <div v-for="(item,index) in his" :key="index" class="pad10 after">
+        <div   v-if="his!==''" class="mainbody bgfff">
+          <div  @click="gomiste(item.name)"  v-for="(item,index) in his" :key="index" class="pad10 after">
             <div class="ih30">{{item.name}}</div>
             <div class="ih30 fs0-8 col9f">{{item.address}}</div>
           </div>
@@ -36,7 +36,7 @@
       </div>
 
       <div v-if="vif" class="search bgfff">
-        <div v-for="(item,index) in list" @click="goaddress({name:item.name,latitude:item.latitude,longitude:item.longitude,address:item.address,geohash:item.geohash})"          :key="index" class="pad10 after">
+        <div  v-for="(item,index) in list" @click="gomiste(item.name);goaddress({name:item.name,latitude:item.latitude,longitude:item.longitude,address:item.address,geohash:item.geohash})"          :key="index" class="pad10 after">
           <div class="ih30">{{item.name}}</div>
           <div class="ih30 fs0-8 col9f">{{item.address}}</div>
         </div>
@@ -78,9 +78,13 @@ export default {
     goback() {
       return this.$router.push("home");
     },
+    gomiste:function(e){
+      this.$router.push("miste");
+      this.$store.commit('changelocated',e) //改变选择地点 绑定到两个事件里面 一个历史记录点击 一个搜索记录点击
+    },
     searchcity() {
       if (this.inputval) {
-        $.get("/pois", {
+        $.get("v1/pois", {
           params: {
             city_id: this.$store.state.nowcity.id,
             keyword: this.inputval,

@@ -1,7 +1,7 @@
 import axios from 'axios';
 const httpService =axios.create(
     {
-        baseURL:'https://elm.cangdu.org/v1',
+        baseURL:'https://elm.cangdu.org/',
         timeout: 3000
     }
 );
